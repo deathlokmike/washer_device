@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "washer",
+			"path": "."
+		}
+	],
+	"settings": {
+    "editor.detectIndentation": false,
+    "files.associations": {
+      "*.tcc": "cpp",
+      "iterator": "cpp",
+      "random": "cpp"
+    }
+	}
+}
