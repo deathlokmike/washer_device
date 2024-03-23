@@ -1,9 +1,10 @@
 #include "OV7670.h"
 #include <Arduino.h>
 #include <HTTPClient.h>
+#include <wifi_config.h>
 
-const char *ssid = "...";
-const char *password = "...";
+extern const char *ssid;
+extern const char *password;
 
 #define USB_SPEED 115200
 
@@ -17,12 +18,12 @@ const char *password = "...";
 #define CAM_PIN_D4 32 // красный
 #define CAM_PIN_D3 25 // желтый
 
-#define CAM_PIN_D2 26 // зеленый
-#define CAM_PIN_D1 27 // синий
-#define CAM_PIN_D0 14 // фиолетовый
+#define CAM_PIN_D2 26    // зеленый
+#define CAM_PIN_D1 27    // синий
+#define CAM_PIN_D0 14    // фиолетовый
 #define CAM_PIN_VSYNC 13 // зеленый
-#define CAM_PIN_HREF 22 // серый
-#define CAM_PIN_PCLK 12 // синий
+#define CAM_PIN_HREF 22  // серый
+#define CAM_PIN_PCLK 12  // синий
 
 OV7670 *camera;
 String endpoint = "http://192.168.1.163:8000/test";
@@ -51,7 +52,8 @@ void loop() {
     String url = endpoint;
     http.begin(url.c_str());
 
-    int httpResponseCode = http.sendRequest("POST", camera->frame, camera->frameBytes);
+    int httpResponseCode =
+        http.sendRequest("POST", camera->frame, camera->frameBytes);
 
     if (httpResponseCode > 0) {
       String payload = http.getString();
