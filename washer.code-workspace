@@ -1,10 +1,10 @@
 {
 	"folders": [
-		{
-			"name": "washer",
-			"path": "."
-		}
-	],
+    {
+      "name": "washer",
+      "path": "."
+    }
+  ],
 	"settings": {
     "editor.detectIndentation": false,
     "files.associations": {
