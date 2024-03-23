@@ -1,17 +1,6 @@
 #pragma once
+#include "distance.h"
 #include "timer.h"
-
-class Distance {
-private:
-  long front = 0;
-  long side = 0;
-
-public:
-  void setFront(long value);
-  void setSide(long value);
-  long getFront();
-  long getSide();
-};
 
 class SensorsControl {
 private:
@@ -30,8 +19,8 @@ private:
   void debugDistance();
 
 public:
-  SensorsControl(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
-                 int8_t USSideTrigPin, int8_t USSideEchoPin);
-
+  SensorsControl();
+  void attach(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
+              int8_t USSideTrigPin, int8_t USSideEchoPin);
   Distance getDistance();
 };

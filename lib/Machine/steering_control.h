@@ -9,6 +9,7 @@ private:
   Servo servo = Servo();
 
 public:
-  SteeringControl(uint8_t PWMPin);
+  SteeringControl();
+  void attach(uint8_t PWMPin);
   void turn(steering_directions direction);
 };

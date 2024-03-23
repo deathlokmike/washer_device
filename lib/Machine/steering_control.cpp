@@ -1,6 +1,8 @@
 #include "steering_control.h"
 
-SteeringControl::SteeringControl(uint8_t PWMPin) { servo.attach(PWMPin); };
+SteeringControl::SteeringControl(){};
+
+void SteeringControl::attach(uint8_t PWMPin) { servo.attach(PWMPin); }
 
 void SteeringControl::turn(steering_directions direction) {
   if (direction != this->currentDirection) {

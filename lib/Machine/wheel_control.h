@@ -18,6 +18,7 @@ private:
   void goBackward();
 
 public:
-  WheelControl(uint8_t INAPin, uint8_t INBPin, uint8_t PWMPin);
+  WheelControl();
+  void attach(uint8_t INAPin, uint8_t INBPin, uint8_t PWMPin);
   void go(wheel_directions direction);
 };

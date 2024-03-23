@@ -1,15 +1,9 @@
 #include "sensors_control.h"
 
-void Distance::setFront(long value) { front = value; }
+SensorsControl::SensorsControl() {}
 
-void Distance::setSide(long value) { side = value; }
-
-long Distance::getFront() { return front; }
-
-long Distance::getSide() { return side; }
-
-SensorsControl::SensorsControl(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
-                               int8_t USSideTrigPin, int8_t USSideEchoPin) {
+void SensorsControl::attach(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
+                            int8_t USSideTrigPin, int8_t USSideEchoPin) {
   frontTrig = USFrontTrigPin;
   frontEcho = USFrontEchoPin;
   sideTrig = USSideTrigPin;

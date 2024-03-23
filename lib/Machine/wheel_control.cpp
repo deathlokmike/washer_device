@@ -1,11 +1,13 @@
 #include "wheel_control.h"
 
-WheelControl::WheelControl(uint8_t INAPin, uint8_t INBPin, uint8_t PWMPin) {
+WheelControl::WheelControl(){};
+
+void WheelControl::attach(uint8_t INAPin, uint8_t INBPin, uint8_t PWMPin) {
   ina = INAPin;
   inb = INBPin;
   pwm = PWMPin;
   this->setup();
-};
+}
 
 void WheelControl::debugSpeed() {
   Serial.print("Speed: ");
