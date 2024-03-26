@@ -9,7 +9,7 @@ void WheelControl::attach(uint8_t INAPin, uint8_t INBPin, uint8_t PWMPin) {
   this->setup();
 }
 
-void WheelControl::debugSpeed() {
+void WheelControl::debug() {
   Serial.print("Speed: ");
   Serial.print(String(currentDirection));
   Serial.print("\n");
@@ -31,6 +31,7 @@ void WheelControl::go(wheel_directions direction) {
     currentDirection = currentDirection == stop ? boost : direction;
     analogWrite(pwm, currentDirection);
   }
+  this->debug();
 }
 
 void WheelControl::goForward() {

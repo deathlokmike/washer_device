@@ -8,3 +8,5 @@ bool Timer::isReady() {
   }
   return false;
 }
+
+uint32_t Timer::getRemainingTime() { return millis() - _tmr; }

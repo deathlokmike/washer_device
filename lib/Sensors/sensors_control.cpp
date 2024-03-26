@@ -1,17 +1,15 @@
 #include "sensors_control.h"
+#include "NewPing.h"
 
 SensorsControl::SensorsControl() {}
 
-void SensorsControl::attach(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
-                            int8_t USSideTrigPin, int8_t USSideEchoPin) {
-  frontTrig = USFrontTrigPin;
-  frontEcho = USFrontEchoPin;
-  sideTrig = USSideTrigPin;
-  sideEcho = USSideEchoPin;
-  this->setup();
-}
+void SensorsControl::attach(uint8_t USFrontTrigPin, uint8_t USFrontEchoPin,
+                            uint8_t USSideTrigPin, uint8_t USSideEchoPin) {
+  frontSonar = NewPing(USFrontTrigPin, USFrontEchoPin, MAX_DISTANCE);
+  sideSonar = NewPing(USSideTrigPin, USSideEchoPin, MAX_DISTANCE);
+};
 
-void SensorsControl::debugDistance() {
+void SensorsControl::debug() {
   Serial.print("Front distance: ");
   Serial.print(String(distance.getFront()));
   Serial.print("\n");
@@ -20,23 +18,11 @@ void SensorsControl::debugDistance() {
   Serial.print("\n");
 }
 
-void SensorsControl::setup() {
-  pinMode(frontTrig, OUTPUT);
-  pinMode(frontEcho, INPUT);
-  pinMode(sideTrig, OUTPUT);
-  pinMode(sideEcho, INPUT);
-}
-
 Distance SensorsControl::getDistance() {
-  digitalWrite(frontTrig, HIGH);
-  digitalWrite(sideTrig, HIGH);
-  if (sensorTimer.isReady()) {
-    digitalWrite(frontTrig, LOW);
-    digitalWrite(sideTrig, LOW);
-    frontDuration = pulseIn(frontEcho, HIGH);
-    sideDuration = pulseIn(sideEcho, HIGH);
-    distance.setFront(frontDuration / 58.2);
-    distance.setSide(sideDuration / 58.2);
-  }
+  distance.setFront(frontSonar.ping_median(5, MAX_DISTANCE) / US_ROUNDTRIP_CM);
+  delay(50);
+  distance.setSide(sideSonar.ping_median(5, MAX_DISTANCE) / US_ROUNDTRIP_CM);
+  delay(50);
+  this->debug();
   return distance;
 }

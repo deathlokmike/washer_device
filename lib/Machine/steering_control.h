@@ -1,12 +1,14 @@
 #pragma once
 #include <ESP32Servo.h>
 
-enum steering_directions { straight = 90, left = 45, right = 135 };
+enum steering_directions { straight = 90, left = 125, right = 55 };
 
 class SteeringControl {
 private:
   steering_directions currentDirection = straight;
   Servo servo = Servo();
+
+  void debug();
 
 public:
   SteeringControl();

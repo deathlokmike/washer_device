@@ -1,26 +1,19 @@
 #pragma once
 #include "distance.h"
-#include "timer.h"
+#include <NewPing.h>
+
+#define MAX_DISTANCE 400
 
 class SensorsControl {
 private:
-  uint8_t frontTrig;
-  uint8_t frontEcho;
-  uint8_t sideTrig;
-  uint8_t sideEcho;
-
-  Timer sensorTimer = Timer(10);
-
-  long frontDuration;
-  long sideDuration;
-
+  NewPing frontSonar = NewPing(0, 0, 400);
+  NewPing sideSonar = NewPing(0, 0, 400);
   Distance distance = Distance();
-  void setup();
-  void debugDistance();
+  void debug();
 
 public:
   SensorsControl();
-  void attach(uint8_t USFrontTrigPin, int8_t USFrontEchoPin,
-              int8_t USSideTrigPin, int8_t USSideEchoPin);
+  void attach(uint8_t USFrontTrigPin, uint8_t USFrontEchoPin,
+              uint8_t USSideTrigPin, uint8_t USSideEchoPin);
   Distance getDistance();
 };

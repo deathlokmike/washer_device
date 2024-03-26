@@ -11,7 +11,7 @@ private:
 
   wheel_directions currentDirection = stop;
 
-  void debugSpeed();
+  void debug();
   void setup();
 
   void goForward();
